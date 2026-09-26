@@ -1,0 +1,113 @@
+Phase 5: Complete Deployment & Validation Script
+
+This document contains all PowerShell, Azure CLI, and Linux Bash commands required to provision, enforce, and validate the Phase 5 Identity Governance, Access Control, and End-to-End Landing Zone configuration.
+
+🛠️ Step 1: Azure PowerShell & CLI Provisioning (Management Plane)
+
+Execute these commands from Azure Cloud Shell or a local authenticated PowerShell session targeting subscription sub-ent-platform-prod (41a2b403-5b13-4a58-8cc0-c3ec75dba78a).
+
+# ==============================================================================
+# 1. Environment Context & Context Setting
+# ==============================================================================
+$SubscriptionId = "41a2b403-5b13-4a58-8cc0-c3ec75dba78a"
+Set-AzContext -SubscriptionId $SubscriptionId
+
+# Define Resource Group & Principal Parameters
+$HubRG = "rg-prd-hub-network-001"
+$AppRG = "rg-prd-app-privatelink-001"
+$AdminPrincipalId = "<admin-object-id>" # Replace with target Entra ID Admin Object ID
+
+# ==============================================================================
+# 2. Entra PIM Eligible Assignment (JIT Role Assignment)
+# ==============================================================================
+$SubScope = "/subscriptions/$SubscriptionId"
+$RoleDef = Get-AzRoleDefinition -Name "Contributor"
+
+# Request Just-In-Time Eligible Contributor Role Assignment
+New-AzRoleEligibilityScheduleRequest `
+  -Name (New-Guid) `
+  -Scope $SubScope `
+  -PrincipalId $AdminPrincipalId `
+  -RoleDefinitionId $RoleDef.Id `
+  -RequestType "AdminAssign"
+
+# ==============================================================================
+# 3. Conditional Access Baseline Policy Setup (CA-ZeroTrust-Admin-Baseline)
+# ==============================================================================
+# Azure Management App GUID: 797f1113-7002-4b15-af92-96691741362e
+# Note: Ensure Microsoft Graph PowerShell module is installed (Install-Module Microsoft.Graph)
+
+Connect-MgGraph -Scopes "Policy.ReadWrite.ConditionalAccess"
+
+$Conditions = @{
+    Applications = @{
+        IncludeApplications = @("797f1113-7002-4b15-af92-96691741362e") # Azure Management
+    }
+    Users = @{
+        IncludeUsers = @("All")
+        ExcludeUsers = @("<emergency-access-account-id>") # Standard glass-break account
+    }
+    ClientAppTypes = @("all")
+}
+
+$GrantControls = @{
+    Operator = "AND"
+    BuiltInControls = @("mfa")
+    AuthenticationStrength = @{
+        Id = "00000000-0000-0000-0000-000000000002" # Passwordless / Strong MFA Strength
+    }
+}
+
+New-MgIdentityConditionalAccessPolicy `
+    -DisplayName "CA-ZeroTrust-Admin-Baseline" `
+    -State "enabled" `
+    -Conditions $Conditions `
+    -GrantControls $GrantControls
+
+
+🧪 Step 2: Comprehensive End-to-End Operational Validation
+
+Execute the following diagnostic routines to validate Phase 3 (Control Plane Routing), Phase 4 (Data Plane Isolation), and Phase 5 (Identity Governance).
+
+Section A: Linux NVA BGP Validation (Phase 3 Control Plane)
+
+Run on peer-linux-vm (10.0.1.4) via SSH:
+
+#!/bin/bash
+# Check BGP Neighbor Status with Azure Route Server (10.0.2.4 & 10.0.2.5)
+sudo vtysh -c "show ip bgp summary"
+
+# Check Advertised Routes to Route Server (Expecting 10.1.1.0/24)
+sudo vtysh -c "show ip bgp"
+
+
+Section B: Azure Route Server Verification (Phase 3 Control Plane)
+
+Run via Azure PowerShell:
+
+# Verify Learned BGP Routes from Linux NVA Peer
+Get-AzRouteServerPeerLearnedRoute `
+  -ResourceGroupName "rg-prd-hub-network-001" `
+  -RouteServerName "route-server-hub-001" `
+  -PeerName "peer-linux-vm" | Format-Table
+
+
+Section C: Private Link Service & Endpoint Testing (Phase 4 Data Plane)
+
+Run from a Spoke VM inside vnet-spoke-001:
+
+#!/bin/bash
+# 1. Test TCP 80 Listener on Private Endpoint pe-app-001
+nc -zv 10.1.2.4 80
+
+# 2. Query HTTP Endpoint across Private Link Service (pls-cross-boundary-001)
+curl -I http://10.1.2.4/
+
+
+Section D: Identity & Governance Audit (Phase 5 Management Plane)
+
+Run via Azure PowerShell:
+
+# Audit Subscription Scope Active vs Eligible Role Assignments to ensure Zero Permanent Standing Access
+Get-AzRoleAssignment -Scope "/subscriptions/41a2b403-5b13-4a58-8cc0-c3ec75dba78a" | 
+  Select-Object DisplayName, RoleDefinitionName, Scope | Format-Table

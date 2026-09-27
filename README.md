@@ -11,6 +11,7 @@ This repository documents the complete deployment lifecycle, configuration stand
 The architecture enforces **Control Plane Security** (Microsoft Entra PIM JIT elevation and Conditional Access baselines) alongside **Data Plane Isolation** (eBGP dynamic routing via FRRouting v8.4.4 on Linux, Azure Route Server, Internal Load Balancers, and Cross-Boundary Private Link Services).
 
 ---
+<img width="7250" height="7170" alt="AzureExportedTemplate" src="https://github.com/user-attachments/assets/34aee939-3ce8-4164-b62e-4aae487fadea" />
 
 ## 🏗 System Architecture Diagram
 

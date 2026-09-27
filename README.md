@@ -220,7 +220,7 @@ LocalAddress Network     NextHop  SourcePeer Origin AsPath Weight
 
 ## 📸 Infrastructure Verification Images
 
-### Phase 1: Governance & Management Hierarchy
+### *[Phase 1: Governance & Management Hierarchy](../azure-ebgp-pim-landing-zone/docs/phase-1-governance/README.md)*
 | Resource | Verification Description | Evidence Link |
 |---|---|---|
 | Management Hierarchy | `sub-ent-platform-prod` placed inside `mg-prod` | [View Evidence](docs/images/phase-1/01-mg-hierarchy.png) |
@@ -228,7 +228,7 @@ LocalAddress Network     NextHop  SourcePeer Origin AsPath Weight
 
 ---
 
-### Phase 2: Core Network Fabric
+### *[Phase 2: Core Network Fabric](../azure-ebgp-pim-landing-zone/docs/phase-2-network-fabric/README.md)*
 | Resource | Verification Description | Evidence Link |
 |---|---|---|
 | Subnet Configuration | `vnet-hub-001` subnet partitioning (`RouteServerSubnet`, etc.) | [View Evidence](docs/images/phase-2/03-vnet-subnets.png) |
@@ -236,7 +236,7 @@ LocalAddress Network     NextHop  SourcePeer Origin AsPath Weight
 
 ---
 
-### Phase 3: Dynamic BGP Routing
+### *[Phase 3: Dynamic BGP Routing](../azure-ebgp-pim-landing-zone/docs/phase-3-bgp-frrouting/README.md)*
 | Resource | Verification Description | Evidence Link |
 |---|---|---|
 | Azure Route Server | `route-server-hub-001` overview showing ASN `65515` | [View Evidence](docs/images/phase-3/01-routeserver-overview.png) |
@@ -244,7 +244,7 @@ LocalAddress Network     NextHop  SourcePeer Origin AsPath Weight
 
 ---
 
-### Phase 4: Cross-Boundary Private Link Service
+### *[Phase 4: Cross-Boundary Private Link Service](../azure-ebgp-pim-landing-zone/docs/phase-4-private-link/README.md)*
 | Resource | Verification Description | Evidence Link |
 |---|---|---|
 | Private Link Service | `pls-cross-boundary-001` alias and NAT subnet mapping | [View Evidence](docs/images/phase-4/01-privatelink-service.png) |
@@ -252,7 +252,7 @@ LocalAddress Network     NextHop  SourcePeer Origin AsPath Weight
 
 ---
 
-### Phase 5: Identity Governance & Access Hardening
+### *[Phase 5: Identity Governance & Access Hardening](../azure-ebgp-pim-landing-zone/docs/phase-5-identity-governance/README.md)*
 | Resource | Verification Description | Evidence Link |
 |---|---|---|
 | Entra PIM | Eligible Contributor assignment on `sub-ent-platform-prod` | [View Evidence](docs/images/phase-5/01-pim-eligible-assignments.png) |

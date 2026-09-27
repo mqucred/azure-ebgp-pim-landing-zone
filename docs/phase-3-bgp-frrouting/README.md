@@ -4,13 +4,13 @@
 
 ---
 
-## 📋 Phase Overview
+##  Phase Overview
 
 Phase 3 establishes the **Control Plane Routing Layer** for the enterprise landing zone. By pairing `route-server-hub-001` (`AS 65515`) with `peer-linux-vm` (`AS 65001`), dynamic routes advertised by the Linux NVA are automatically injected into the Azure SDN fabric. Outbound internet connectivity for package installations (`sudo apt install frr`) is handled securely using an Azure NAT Gateway (`ng-hub-001`), preserving zero-public-IP isolation.
 
 ---
 
-## ⚡ Key Technical Deliverables & Specifications
+##  Key Technical Deliverables & Specifications
 
 - **Target Region:** `eastus`
 - **Subscription Scope:** `sub-ent-platform-prod` (`41a2b403-5b13-4a58-8cc0-c3ec75dba78a`)
@@ -31,7 +31,7 @@ Phase 3 establishes the **Control Plane Routing Layer** for the enterprise landi
 
 ---
 
-## 🏗 Dynamic Routing Architecture
+##  Dynamic Routing Architecture
 
 | Component | Resource Identifier / IP | Details / BGP Role | Location | Resource Group |
 |---|---|---|---|---|
@@ -46,7 +46,7 @@ Phase 3 establishes the **Control Plane Routing Layer** for the enterprise landi
 
 ---
 
-## 🚀 Implementation Steps
+##  Implementation Steps
 
 ### 1. Route Server & Egress Gateway Deployment
 Provisioned `route-server-hub-001` inside `RouteServerSubnet` (`10.0.2.0/24`). Attached `ng-hub-001` (Azure NAT Gateway) to `HubSubnet` (`10.0.1.0/24`) to give `peer-linux-vm` outbound internet access for packages without exposing inbound public IP endpoints.
@@ -92,7 +92,7 @@ Registered `peer-linux-vm` (`10.0.1.4`, ASN `65001`) as an explicit BGP Peer wit
 
 ---
 
-## 🔬 Evidence & Verification
+##  Evidence & Verification
 
 ### 1. Azure Route Server Overview & Peer Registration
 Verification of `route-server-hub-001` (`AS 65515`) deployed in `RouteServerSubnet` (`10.0.2.0/24`) with `peer-linux-vm` (`10.0.1.4`, ASN `65001`) attached in `Connected` state.

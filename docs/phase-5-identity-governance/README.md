@@ -4,13 +4,13 @@
 
 ---
 
-## 📋 Phase Overview
+##  Phase Overview
 
 Phase 5 completes the platform landing zone by securing the management and control planes. Using **Microsoft Entra Privileged Identity Management (PIM)**, permanent administrator permissions are eliminated in favor of just-in-time (JIT) eligible role activations. Access to management interfaces is governed by the **Conditional Access Baseline Policy** (`CA-ZeroTrust-Admin-Baseline`), requiring strong MFA and strict session controls.
 
 ---
 
-## ⚡ Key Technical Specifications
+##  Key Technical Specifications
 
 - **Target Subscription Scope:** `sub-ent-platform-prod` (`Sub-id`)
 - **Target Resource Group:** `rg-prd-app-privatelink-001` / `rg-prd-hub-network-001`
@@ -30,7 +30,7 @@ Phase 5 completes the platform landing zone by securing the management and contr
 
 ---
 
-## 🏗️ Phase 5 Governance Architecture
+##  Phase 5 Governance Architecture
 
 | Control Layer | Policy / Role Name | Scope / Target | Enforcement / Grant Mechanism |
 |---|---|---|---|
@@ -41,7 +41,7 @@ Phase 5 completes the platform landing zone by securing the management and contr
 
 ---
 
-## 🛠️ Step-by-Step Implementation
+##  Step-by-Step Implementation
 
 ### 1. Entra PIM Eligible Assignment Provisioning
 
@@ -69,10 +69,10 @@ Enforced administrative sign-in policies targeting Microsoft Azure Management en
 
 ---
 
-## 🔬 Evidence & Validation Matrix
+##  Evidence & Validation Matrix
 
-| Resource / Control | Verification Description | Evidence Link |
-|---|---|---|
+| Resource / Control | Verification Description | 
+|---|---|
 | **Entra PIM** | Eligible Contributor assignment on `sub-ent-platform-prod` | `docs/images/phase-5/01-pim-eligible-assignments.png` |
 | **Conditional Access** | `CA-ZeroTrust-Admin-Baseline` policy enforcement details | `docs/images/phase-5/02-conditional-access-policy.png` |
 
@@ -94,7 +94,7 @@ Verification of `CA-ZeroTrust-Admin-Baseline` conditional access settings enforc
 
 ---
 
-## 🧪 Comprehensive End-to-End Landing Zone Validation
+##  Comprehensive End-to-End Landing Zone Validation
 
 To validate the entire multi-phase landing zone implementation (Phases 1 through 5), execute the following diagnostic tests:
 

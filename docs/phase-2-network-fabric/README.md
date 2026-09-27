@@ -4,13 +4,13 @@
 
 ---
 
-## 📋 Phase Overview
+##  Phase Overview
 
 Phase 2 builds the **Data Plane Network Backbone** for the Zero-Trust Landing Zone in `East US`. It establishes `vnet-hub-001` (`10.0.0.0/16`) and `vnet-spoke-001` (`10.1.0.0/16`), partitions dedicated platform subnets, and configures bidirectional VNet peering to enable secure inter-VNet routing.
 
 ---
 
-## ⚡ Key Technical Deliverables & Specifications
+##  Key Technical Deliverables & Specifications
 
 - **Target Region:** `eastus`
 - **Subscription Scope:** `sub-ent-platform-prod` (`Sub-id`)
@@ -30,7 +30,7 @@ Phase 2 builds the **Data Plane Network Backbone** for the Zero-Trust Landing Zo
 
 ---
 
-## 🏗 Network Fabric Architecture
+##  Network Fabric Architecture
 
 | Virtual Network | Subnet Name | CIDR Prefix | Resource Group | Purpose / Usage |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ Phase 2 builds the **Data Plane Network Backbone** for the Zero-Trust Landing Zo
 
 ---
 
-## 🚀 Implementation Steps
+##  Implementation Steps
 
 ### 1. Hub VNet & Subnet Provisioning
 Provisioned `vnet-hub-001` (`10.0.0.0/16`) inside `rg-prd-hub-network-001` with pre-allocated subnets (`HubSubnet`, `RouteServerSubnet`, and `AzureFirewallSubnet`). `RouteServerSubnet` adheres strictly to Microsoft's required casing for Azure Route Server integration in Phase 3.
@@ -56,7 +56,7 @@ Established bidirectional VNet peering (`peer-hub-to-spoke` and `peer-spoke-to-h
 ---
 
 
-## 🔬 Evidence & Verification
+##  Evidence & Verification
 
 All evidence screenshots are stored in `docs/images/phase-2/`:
 

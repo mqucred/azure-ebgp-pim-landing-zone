@@ -4,13 +4,13 @@
 
 ---
 
-## 📋 Phase Overview
+##  Phase Overview
 
 Phase 4 completes the **Data Plane & Service Isolation Layer** for the Hub-and-Spoke architecture. Rather than relying on traditional virtual network peering or direct routed paths for sensitive application tiers, backend services are exposed strictly through an Internal Load Balancer (ILB) attached to a Private Link Service (`pls-cross-boundary-001`). Access is granted across boundaries to `pe-app-001` via a controlled, manual approval connection lifecycle.
 
 ---
 
-## ⚡ Key Technical Deliverables & Specifications
+##  Key Technical Deliverables & Specifications
 
 - **Target Region:** `eastus`
 - **Subscription Scope:** `sub-ent-platform-prod` (`Sub-id`)
@@ -32,7 +32,7 @@ Phase 4 completes the **Data Plane & Service Isolation Layer** for the Hub-and-S
 
 ---
 
-## 🏗 Architecture Topology & CIDR Breakdown
+##  Architecture Topology & CIDR Breakdown
 
 | Resource Name | Type | IP Address / Prefix | Subnet | Resource Group |
 |---|---|---|---|---|
@@ -42,7 +42,7 @@ Phase 4 completes the **Data Plane & Service Isolation Layer** for the Hub-and-S
 
 ---
 
-## 🚀 Implementation Steps
+##  Implementation Steps
 
 ### 1. Internal Load Balancer (`slb-app-001`) Provisioning
 Deployed an internal, standard SKU load balancer in `WorkloadSubnet` (`10.1.1.0/24`) with static private IP `10.1.1.4` to serve as the backend service entry point.
@@ -60,7 +60,7 @@ Because cross-boundary isolation is enforced, the connection requested an explic
 
 ---
 
-## 🔬 Evidence & Verification
+##  Evidence & Verification
 
 ### 1. Private Link Service Overview & NAT Configuration
 Verification of `pls-cross-boundary-001` bound to backend frontend IP `10.1.1.4` (`slb-app-001`) with dedicated NAT Subnet `10.1.3.0/24`.

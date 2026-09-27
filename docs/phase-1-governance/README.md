@@ -4,13 +4,13 @@
 
 ---
 
-## 📌 Phase Overview
+##  Phase Overview
 
 Phase 1 establishes the foundational management boundaries for the **Zero-Trust Enterprise Landing Zone**. By positioning the target subscription into a dedicated production Management Group and programmatically enforcing standardized governance tags across resource groups, all downstream infrastructure inherits administrative compliance and audit visibility.
 
 ---
 
-## ⚙️ Key Technical Deliverables & Specifications
+##  Key Technical Deliverables & Specifications
 
 - **Target Location:** `East US`
 - **Tenant Scope:** `Email.onmicrosoft.com`
@@ -22,7 +22,7 @@ Phase 1 establishes the foundational management boundaries for the **Zero-Trust 
 
 ---
 
-## 🛠️ Implementation Steps
+##  Implementation Steps
 
 ### 1. Management Group Hierarchy Alignment
 Moved `sub-ent-platform-prod` under the `mg-prod` management group to ensure RBAC and Policy enforcement flow down automatically.
@@ -46,7 +46,7 @@ Programmatically applied standard enterprise metadata tags across all resource g
 ---
 
 
-## 🔬 Evidence & Verification
+##  Evidence & Verification
 
 All evidence images are linked using relative paths to match the root directory structure:
 
